@@ -1,0 +1,169 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>  
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+</head>  
+<body>
+<!-- converted from marddown file -->  
+<h1>How to Run gitdags on Ubuntu 14.04 LTS</h1>
+
+<p>These instructions show how to run LaTeX on the example document and produce a PDF outout.</p>
+
+<h2>Installing the prerequisites</h2>
+
+<p>Gigdags requires three prerequsites
+* a LaTeX distribution,
+* the tikz package (v3.0 or later),
+* the xcolor-solarized package.</p>
+
+<h3>Installing a LaTex distribution</h3>
+
+<p>First, do NOT use apt-get to install. The best is to install <a href="http://www.tug.org/texlive/">TexLive</a> from the <a href="http://www.tug.org">Tex Users Groug (TUG)</a>.</p>
+
+<ol>
+<li><p>Download the latest install file, using your <em>wget</em> or your browser.</p>
+
+<pre>
+~$ <b>cd ~/Downloads</b>
+~/Downloads$ <b>wget mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz</b>
+</pre>
+
+<p>This will create the file <em>install-tl-unx.tar.gz</em></p></li>
+<li><p>Uncompress the gzip file:</p>
+
+<pre>
+~/Downloads$ <b>tar xzf install-tl-unx.tar.gz</b>
+</pre></li>
+<li><p>cd into uncompressed directory and run <em>install-tl</em></p>
+
+<pre>
+~/Downloads$ <b>cd install-tl-20150208</b>
+~/Downloads$ <b>./install-tl</b>
+</pre>
+
+<p>This is a LONG process and may take an hour to load the nearly 4000 modules</p>
+
+<p>* Note: If you have file or directory permission issues, run with <em>sudo</em></p>
+
+<pre>
+~/Downloads$ <b>sudo ./install-tl</b>
+</pre></li>
+<li><p>Following the Post-Install instructions, Update <em>PATH</em></p>
+
+<p>Adding texlive to your current session PATH:</p>
+
+<pre>
+~/Downloads$ <b>PATH=/usr/local/texlive/2014/bin/x86_64-linux:$PATH</b>
+</pre>
+
+<p>Adding texlive to your ~/.bashrc file for future sessions:</p>
+
+<pre>
+export PATH="/usr/local/texlive/2014/bin/i386-linux:$PATH"
+</pre></li>
+<li><p>Testing your current set-up:</p>
+
+<p>In a directory you can write to, try basic document processing:</p>
+
+<pre>
+~$ <b>latex small2e</b>
+[...]
+Output written on small2e.dvi (1 page, 1780 bytes).
+~$ <b>ls</b>
+small2e.aux  small2e.dvi  small2e.log
+</pre></li>
+</ol>
+
+<h3>Installing <em>tikz</em> Package (v3.0 or later)</h3>
+
+<p>The <em>tikz</em> package is part of the <em>rpf</em> package. The latest TexLive install includes a sufficent version of <em>rpf</em>. Use tlmgr (TexLive package manager) to check your verion of rpf:</p>
+
+<pre>
+~$ <b>tlmgr info pgf</b>
+package:     pgf
+category:    Package
+shortdesc:   Create PostScript and PDF graphics in TeX.
+longdesc:    PGF is a macro package for creating graphics. It is platform- and format-independent and works together with the most important TeX backend drivers, including pdftex and dvips. It comes with a user-friendly syntax layer called TikZ. Its usage is similar to pstricks and the standard picture environment. PGF works with plain (pdf-)TeX, (pdf-)LaTeX, and ConTeXt. Unlike pstricks, it can produce either PostScript or PDF output.
+installed:   Yes
+revision:    33057
+sizes:       src: 349k, doc: 13197k, run: 4993k
+relocatable: Yes
+<b>cat-version: 3.0.0</b>
+cat-date:    2014-02-26 21:08:13 +0100
+cat-license: lppl1.3
+collection:  collection-pictures
+</pre>
+
+<h3>Installing the <em>xcolor-solarized</em> Package.</h3>
+
+<p>The easiest way to install package files is to place them on your TeX search path. To find your default location use <em>kpsewhich</em> (included with TexLive).</p>
+
+<ol>
+<li><p>Create a default directory on your TeX search path:</p>
+
+<pre>
+~$ <b>kpsewhich -var-value=TEXMFHOME</b>
+/home/USER/texmf
+</pre>
+
+<p>Create a tex/latex directory in this location:</p>
+
+<pre>
+~$ <b>cd `kpsewhich -var-value=TEXMFHOME`</b>
+/home/USER/texmf$ <b>mkdir tex</b>
+/home/USER/texmf$ <b>mkdir tex/latex</b>
+/home/USER/texmf$ <b>cd tex/latex</b>
+</pre></li>
+<li><p>Change to the new tex/latex directory</p>
+
+<pre>
+/home/USER/texmf/tex/latex$ <b>cd tex/latex</b>
+</pre></li>
+<li><p>Use <em>git</em>** to clone <em>xcolor-solarized</em> locally</p>
+
+<p>Use <em>git</em> to clone the <em>xcolor-solorized</em> repository and create a local xcolor-solorized directory:</p>
+
+<pre>
+/home/USER/texmf/tex/latex$ <b>git clone https://github.com/Jubobs/xcolor-solarized.git</b>
+</pre>
+
+<p>Check to see if <em>gitdags.sty</em> can be seen by TeX</p>
+
+<pre>
+~$ <b>kpsewhich xcolor-solarized.sty</b>
+/home/USER/texmf/tex/latex/gitdags/xcolor-solarized.sty
+</pre>
+
+<p>** To install <em>git</em> use:
+    <pre>
+    sudo apt-get update
+    sudo apt-get install git
+    </pre></p></li>
+</ol>
+
+<h2>Installing <em>gitdags</em> Package</h2>
+
+<p>Similar to the last step in the previous section, use <em>git</em> to clone the <em>gitdags</em> repository and create a local gitdags directory</p>
+
+<pre>
+~$ <b>cd /home/USER/texmf/tex/latex</b>
+/home/USER/texmf/tex/latex$ <b>git clone https://github.com/Jubobs/gitdags.git</b>
+</pre>
+
+<p>Check to see if <em>gitdags.sty</em> can be seen by TeX</p>
+
+<pre>
+~$ <b>kpsewhich gitdags.sty</b>
+/home/USER/texmf/tex/latex/gitdags/gitdags.sty
+</pre>
+
+<h2>Genating a PDF of the Example Document</h2>
+
+<p>Use cut-and-paste to copy the example DAG document file to a local file, for example "dagfile.tex". The use the <em>pdflatex</em> command to create a PDF.</p>
+
+<p><pre>
+~$ pdflatex dagfile.tex
+[...]
+Output written on dagfile.pdf (1 page, 86347 bytes).
+Transcript written on dagfile.log.</p>
+</body>
+</html>
