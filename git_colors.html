@@ -1,0 +1,166 @@
+<h1>Git Colors</h1>
+
+<p>Git colors can be customized through the command-line interface (CLI) or through editing the git config files.</p>
+
+<p>This information was gleaned from <a href="http://git-scm.com/docs/git-config">git-scm.com</a></p>
+
+<h2>Git Config files</h2>
+
+<p>Git config files affect repositories at three levels. Local levels have precedent over more global levels</p>
+
+<pre><code>/etc/gitconfig "--system" wide configuration
+~/.gitconfig "--global" configuration across all user repositories
+.git/config "--local" configuration of single repository (default)
+</code></pre>
+
+<h2>Git Config CLI</h2>
+
+<p>Git config files can be updated on the command line using <code>git config</code> and specifying the git config file-option.</p>
+
+<pre><code>git config [&lt;file-option&gt;] name value
+</code></pre>
+
+<h2>Enabling Colors</h2>
+
+<pre><code>color.ui: false (or never) | always | true (or auto)
+</code></pre>
+
+<p>Set it to true or auto (this is the default since Git 1.8.4) to use color when written to the terminal. For example,</p>
+
+<p><code>$</code> <b><code>git config --global color.ui true</code></b></p>
+
+<h2>Specifying Colors</h2>
+
+<p>Git colors are specified as <code>&lt;foreground&gt; &lt;background&gt; &lt;attributes&gt;</code></p>
+
+<pre><code>Colors: normal | black | red | green | yellow | blue | magenta | cyan | white | [0-255] | #[000000-ffffff]
+</code></pre>
+
+<p>ANSI 256 color and 24-bit RGB color as hex are terminal dependent.</p>
+
+<pre><code>Attributes on: bold | dim | ul | blink | reverse
+Attributes off: nobold | nodim | noul | noblink | noreverse.
+</code></pre>
+
+<h2>git-branch</h2>
+
+<h3>git-branch enable/disable color</h3>
+
+<pre><code>color.branch:  always | false (or never) | auto (or true)
+</code></pre>
+
+<p>Auto (or true): colors are used only when the output is to a terminal. Defaults to false.</p>
+
+<h3>git-branch color customize <code>&lt;slot&gt;</code></h3>
+
+<pre><code>color.branch.&lt;slot&gt; where &lt;slot&gt; is
+    current (the current branch) |
+    local (a local branch) |
+    remote (a remote-tracking branch in refs/remotes/) |
+    upstream (upstream tracking branch) |
+    plain (other refs)
+</code></pre>
+
+<h2>git-diff, git-log, git-show</h2>
+
+<h3>git-diff enable/disable color to patches</h3>
+
+<pre><code>color.diff:  always | false (or never) | auto (or true)
+</code></pre>
+
+<p>Always, git-diff, git-log, and git-show will use color for all patches. If true or auto, those commands will only use color when output is to the terminal. Defaults to false.</p>
+
+<h3>git-diff color customize <code>&lt;slot&gt;</code></h3>
+
+<pre><code>color.diff.&lt;slot&gt; where &lt;slot&gt; is
+    plain (context text) |
+    meta (metainformation) |
+    frag (hunk header) |
+    func (function in hunk header) |
+    old (removed lines) |
+    new (added lines) |
+    commit (commit headers) |
+    whitespace (highlighting whitespace errors)
+</code></pre>
+
+<h2>git-log --decorate output</h2>
+
+<h3>git-log --decorate color customize <code>&lt;slot&gt;</code></h3>
+
+<pre><code>color.decorate.&lt;slot&gt; where &lt;slot&gt; is
+    branch (local branches) | 
+    remoteBranch (remote-tracking branches) | 
+    tag (tags) | 
+    stash (stash) | 
+    HEAD (HEAD) |
+</code></pre>
+
+<h2>git-grep</h2>
+
+<h3>git-grep enable/disable color</h3>
+
+<pre><code>color.grep:  always | false (or never) | auto (or true)
+</code></pre>
+
+<p>If true or auto, only use color when output is to the terminal. Defaults to false.</p>
+
+<h3>git-grep color customize <code>&lt;slot&gt;</code></h3>
+
+<pre><code>color.grep.&lt;slot&gt; where &lt;slot&gt; is
+    context (non-matching text in context lines (when using -A, -B, or -C)) |
+    filename (filename prefix (when not using -h)) |
+    function (function name lines (when using -p)) |
+    linenumber (line number prefix (when using -n)) |
+    match (matching text (same as setting matchContext and matchSelected)) |
+    matchContext (matching text in context lines) |
+    matchSelected (matching text in selected lines) |
+    selected (non-matching text in selected lines)
+    separator (separators between fields on a line (:, -, and =) and between hunks (--))
+</code></pre>
+
+<h2>git-add, git-clean --interactive</h2>
+
+<h3>git-add, git-clean --interactive enable/disable for interactive prompts and displays</h3>
+
+<pre><code>color.interactive:   always | false (or never) | auto (or true)
+</code></pre>
+
+<p>When set to true or auto, use colors only when the output is to the terminal. Defaults to false.</p>
+
+<h3>git.interactive color customize <code>&lt;slot&gt;</code></h3>
+
+<pre><code>color.interactive.&lt;slot&gt; where &lt;slot&gt; is
+    prompt |
+    header | 
+    help | 
+    error
+</code></pre>
+
+<h2>git-status</h2>
+
+<h3>git-status enable/disable color</h3>
+
+<pre><code>color.status:  always | false (or never) | auto (or true)
+</code></pre>
+
+<p>If set to auto (or true) colors are used only when the output is to a terminal. Defaults to false.</p>
+
+<h3>git-status color customize <code>&lt;slot&gt;</code></h3>
+
+<pre><code>color.status.&lt;slot&gt; where &lt;slot&gt; is
+    header (the header text of the status message) |
+    added or updated (files which are added but not committed) |
+    changed (files which are changed but not added in the index) |
+    untracked (files which are not tracked by Git) |
+    branch (the current branch) |
+    nobranch (the color the no branch warning is shown in, defaulting to red)
+</code></pre>
+
+<h2>git-show-branch</h2>
+
+<h3>git-show-branch enable/disable color</h3>
+
+<pre><code>color.showbranch: always | false (or never) | auto (or true)
+</code></pre>
+
+<p>If set to auto (or true) colors are used only when the output is to a terminal. Defaults to false.</p>
